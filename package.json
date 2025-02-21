@@ -1,6 +1,6 @@
 {
   "name": "naruto-classic-wiki-api",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "naruto-classic-wiki-api",
   "main": "index.js",
   "scripts": {
