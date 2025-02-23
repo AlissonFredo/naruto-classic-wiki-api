@@ -47,10 +47,30 @@ class CharacterController {
         return res.status(400).json({ error: "Character bad request" });
       }
 
-      return res.status(200);
+      return res.status(200).json();
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error: "Error deleting character" });
+    }
+  }
+
+  async update(req, res) {
+    try {
+      const { id } = req.params;
+      const character = await Character.findByPk(id);
+
+      if (!character) {
+        return res.status(404).json({ error: "Character not found" });
+      }
+
+      const { name, about } = req.body;
+      character.name = name;
+      character.about = about;
+      await character.save();
+      return res.status(200).json(character);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Error updating character" });
     }
   }
 }
