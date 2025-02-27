@@ -18,7 +18,7 @@ module.exports = {
           name: "Sasuke Uchiha",
           about:
             "The last surviving member of the Uchiha clan (except for his brother Itachi). He seeks revenge against Itachi and possesses the Sharingan, a powerful hereditary dojutsu.",
-          url: "https://static.wikia.nocookie.net/naruto/images/e/e7/Sasuke_epi_319.png/revision/latest?cb=20130629210647&path-prefix=pt-br",
+          url: "https://upload.wikimedia.org/wikipedia/pt/0/02/Sasukereup.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -34,7 +34,7 @@ module.exports = {
           name: "Kakashi Hatake",
           about:
             "Leader of Team 7, he is an elite ninja known as the 'Copy Ninja' for his ability to copy jutsu using the Sharingan he inherited from Obito Uchiha.",
-          url: "https://static.wikia.nocookie.net/naruto/images/c/ca/Kakashi_Hatake_%28Infobox_-_Naruto%29.PNG/revision/latest?cb=20221012051237&path-prefix=pt-br",
+          url: "https://upload.wikimedia.org/wikipedia/jv/thumb/a/a2/Kakashi.jpg/220px-Kakashi.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -42,7 +42,7 @@ module.exports = {
           name: "Rock Lee",
           about:
             "A ninja who cannot use ninjutsu or genjutsu but makes up for it with intense physical training, becoming a master of taijutsu.",
-          url: "https://static.wikia.nocookie.net/naruto/images/9/97/Rock_Lee_Part_I.png/revision/latest/scale-to-width/360?cb=20160926212512&path-prefix=pt-br",
+          url: "https://upload.wikimedia.org/wikipedia/pt/6/61/RockLeeKishimoto.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
@@ -66,7 +66,7 @@ module.exports = {
           name: "Shikamaru Nara",
           about:
             "An extremely intelligent and strategic ninja, but lazy. He has the ability to manipulate shadows and excels in tactical battles.",
-          url: "https://i.pinimg.com/736x/85/18/b7/8518b7cb7f2d67935a09f4fbc966c8ee.jpg",
+          url: "https://pm1.aminoapps.com/6572/cbe3259daecdf16ce797e49046dc0b54eba72f86_hq.jpg",
           createdAt: new Date(),
           updatedAt: new Date(),
         },
