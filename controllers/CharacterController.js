@@ -14,8 +14,24 @@ class CharacterController {
 
   async findAll(req, res) {
     try {
-      const characters = await Character.findAll();
-      return res.status(200).json(characters);
+      const { page } = req.query;
+      const limit = 6;
+      const offset = (parseInt(page) - 1) * limit;
+
+      const result = await Character.findAndCountAll({
+        limit: limit,
+        offset: offset,
+        order: [["name", "ASC"]],
+      });
+
+      const totalPages = Math.ceil(result.count / limit);
+
+      return res.status(200).json({
+        totalRecords: result.count,
+        totalPages: totalPages,
+        currentPage: page,
+        data: result.rows,
+      });
     } catch (error) {
       console.log(error);
       return res.status(500).json({ error: "Error finding all characters" });
