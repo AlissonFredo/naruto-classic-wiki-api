@@ -26,6 +26,22 @@ class VillageController {
       return res.status(500).json({ error: "Error finding all villages" });
     }
   }
+
+  async find(req, res) {
+    try {
+      const { id } = req.params;
+      const village = await Village.findByPk(id);
+
+      if (village === null) {
+        return res.status(404).json({ error: "Village not found" });
+      }
+
+      return res.status(200).json(village);
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Error finding id village" });
+    }
+  }
 }
 
 module.exports = new VillageController();
