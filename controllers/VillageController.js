@@ -4,6 +4,11 @@ class VillageController {
   async findAll(req, res) {
     try {
       const { page } = req.query;
+
+      if (isNaN(page) || page < 1) {
+        return res.status(400).json({ error: "Page must be a valid number" });
+      }
+
       const limit = 6;
       const offset = (parseInt(page) - 1) * limit;
 
@@ -30,6 +35,11 @@ class VillageController {
   async find(req, res) {
     try {
       const { id } = req.params;
+
+      if (isNaN(id) || id < 1) {
+        return res.status(400).json({ error: "Id must be a valid number" });
+      }
+
       const village = await Village.findByPk(id);
 
       if (village === null) {
