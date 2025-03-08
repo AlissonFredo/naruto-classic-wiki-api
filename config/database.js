@@ -3,24 +3,24 @@ require("dotenv").config();
 
 class Database {
   constructor() {
-    this.sequelize = new Sequelize(
-      process.env.DB_NAME,
-      process.env.DB_USER,
-      process.env.DB_PASS,
-      {
-        host: process.env.DB_HOST,
-        dialect: "mysql",
-        logging: false,
-      }
-    );
+    this.sequelize = new Sequelize(process.env.DB_URL, {
+      dialect: "postgres",
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false, // Necessário para Neon Tech
+        },
+      },
+      logging: false,
+    });
   }
 
   async connect() {
     try {
       await this.sequelize.authenticate();
-      console.log("Connected to database");
+      console.log("Connected to PostgreSQL database");
     } catch (error) {
-      console.log("Error connecting to database: ", error);
+      console.error("Error connecting to database: ", error);
     }
   }
 }
