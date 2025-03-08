@@ -42,27 +42,6 @@ class CharacterController {
       return res.status(500).json({ error: "Error finding id character" });
     }
   }
-
-  async update(req, res) {
-    try {
-      const { id } = req.params;
-      const character = await Character.findByPk(id);
-
-      if (!character) {
-        return res.status(404).json({ error: "Character not found" });
-      }
-
-      const { name, about, url } = req.body;
-      character.name = name;
-      character.about = about;
-      character.url = url;
-      await character.save();
-      return res.status(200).json(character);
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Error updating character" });
-    }
-  }
 }
 
 module.exports = new CharacterController();
