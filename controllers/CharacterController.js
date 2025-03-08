@@ -43,22 +43,6 @@ class CharacterController {
     }
   }
 
-  async destroy(req, res) {
-    try {
-      const { id } = req.params;
-      const response = await Character.destroy({ where: { id: id } });
-
-      if (!response) {
-        return res.status(400).json({ error: "Character bad request" });
-      }
-
-      return res.status(200).json();
-    } catch (error) {
-      console.log(error);
-      return res.status(500).json({ error: "Error deleting character" });
-    }
-  }
-
   async update(req, res) {
     try {
       const { id } = req.params;
