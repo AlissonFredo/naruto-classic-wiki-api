@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "vercel-build": "npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
+    "vercel-build": "npx sequelize-cli db:migrate:undo:all && npx sequelize-cli db:migrate && npx sequelize-cli db:seed:all"
   },
   "author": "",
   "license": "ISC",
