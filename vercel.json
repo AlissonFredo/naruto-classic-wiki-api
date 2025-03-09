@@ -11,8 +11,5 @@
             "src": "(.*)",
             "dest": "./index.js"
         }
-    ],
-    "scripts": {
-        "postinstall": "npm install pg"
-    }
+    ]
 }
