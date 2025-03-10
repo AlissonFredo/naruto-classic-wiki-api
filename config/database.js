@@ -1,12 +1,12 @@
 const { Sequelize } = require("sequelize");
-const pg = require('pg');
+const neon = require('@neondatabase/serverless');
 require("dotenv").config();
 
 class Database {
   constructor() {
     this.sequelize = new Sequelize(process.env.DB_URL, {
       dialect: "postgres",
-      dialectModule: pg,
+      dialectModule: neon,
       dialectOptions: {
         ssl: {
           require: true,
