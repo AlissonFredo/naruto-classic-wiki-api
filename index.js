@@ -4,42 +4,41 @@ const characterRoutes = require("./routes/characterRoutes");
 const villageRoutes = require("./routes/villageRoutes");
 const cors = require("cors");
 
-const swaggerUi = require('swagger-ui-express');
+const swaggerUi = require("swagger-ui-express");
 const path = require("path");
 
 const app = express();
 
-// Caminho para o arquivo swagger.json
 const swaggerDocument = path.join(__dirname, "swagger.json");
 
-// Servir o arquivo swagger.json na rota /swagger.json
 app.use("/swagger.json", express.static(swaggerDocument));
 
-// URL do CSS e JS personalizados
 const customCssUrl =
   "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
-const customJsUrl =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui-bundle.min.js"; // Exemplo de URL para importar JS
 
-// Configuração do Swagger UI com as URLs personalizadas
+
 const options = {
   swaggerOptions: {
-    url: "/swagger.json", // URL do swagger.json
+    url: "/swagger.json", 
   },
-  customCssUrl, // Carregar o CSS do CDN
+  customCssUrl, 
   customJs: `
-    // Importa o script externo para o Swagger UI
-    const script = document.createElement('script');
-    script.src = '${customJsUrl}';
-    script.onload = () => {
-      console.log('Swagger UI Bundle JS carregado com sucesso!');
-    };
-    document.head.appendChild(script);
+    var script1 = document.createElement('script');
+    script1.src = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui-bundle.min.js';
+    document.head.appendChild(script1);
+
+    var script2 = document.createElement('script');
+    script2.src = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui-standalone-preset.min.js';
+    document.head.appendChild(script2);
+
+    var script3 = document.createElement('script');
+    script3.src = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui-init.js';
+    document.head.appendChild(script3);
   `,
+
   customSiteTitle: "Minha API - Documentação",
 };
 
-// Configurar o Swagger UI
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(null, options));
 
 const port = 3000;
