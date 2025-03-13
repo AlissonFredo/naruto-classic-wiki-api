@@ -4,41 +4,43 @@ const characterRoutes = require("./routes/characterRoutes");
 const villageRoutes = require("./routes/villageRoutes");
 const cors = require("cors");
 
-// const swaggerJsDoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require('./swagger.json');
+const swaggerUi = require('swagger-ui-express');
+const path = require("path");
 
 const app = express();
 
-// const swaggerOptions = {
-//   swaggerDefinition: {
-//     openapi: "3.0.0",
-//     info: {
-//       title: "Naruto Classic Wiki API",
-//       version: "1.11.0",
-//       description:
-//         "The Naruto Classic Wiki API is a RESTful API that provides endpoints for managing information about Naruto Classic characters.",
-//     },
-//     servers: [
-//       {
-//         url: "https://naruto-classic-wiki-api.vercel.app/",
-//       },
-//     ],
-//   },
-//   apis: ["./routes/*.js"],
-// };
+// Caminho para o arquivo swagger.json
+const swaggerDocument = path.join(__dirname, "swagger.json");
 
-// const swaggerDocs = swaggerJsDoc(swaggerOptions);
+// Servir o arquivo swagger.json na rota /swagger.json
+app.use("/swagger.json", express.static(swaggerDocument));
 
-// console.log(swaggerDocs);
+// URL do CSS e JS personalizados
+const customCssUrl =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+const customJsUrl =
+  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui-bundle.min.js"; // Exemplo de URL para importar JS
 
-// const customCssUrl =
-//   "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
+// Configuração do Swagger UI com as URLs personalizadas
+const options = {
+  swaggerOptions: {
+    url: "/swagger.json", // URL do swagger.json
+  },
+  customCssUrl, // Carregar o CSS do CDN
+  customJs: `
+    // Importa o script externo para o Swagger UI
+    const script = document.createElement('script');
+    script.src = '${customJsUrl}';
+    script.onload = () => {
+      console.log('Swagger UI Bundle JS carregado com sucesso!');
+    };
+    document.head.appendChild(script);
+  `,
+  customSiteTitle: "Minha API - Documentação",
+};
 
-// app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs, { customCssUrl }));
-
-const customCssUrl = 'https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css';
-app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerDocument, { customCssUrl }));
+// Configurar o Swagger UI
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(null, options));
 
 const port = 3000;
 
