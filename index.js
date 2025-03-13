@@ -13,6 +13,8 @@ app.use(cors());
 app.use(characterRoutes);
 app.use(villageRoutes);
 
+app.use("/swagger-ui", express.static("./node_modules/swagger-ui-dist"));
+
 swaggerConfig.setup(app)
 
 app.listen(port, async () => {
