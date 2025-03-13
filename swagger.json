@@ -1,0 +1,333 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Naruto Classic Wiki API",
+        "description": "The Naruto Classic Wiki API is a RESTful API that provides endpoints for managing information about Naruto Classic characters.",
+        "version": "1.11.0"
+    },
+    "servers": [
+        {
+            "url": "https://naruto-classic-wiki-api.vercel.app/"
+        }
+    ],
+    "tags": [
+        {
+            "name": "character",
+            "description": "Operations about characters"
+        },
+        {
+            "name": "village",
+            "description": "Operations about village"
+        }
+    ],
+    "paths": {
+        "/characters": {
+            "get": {
+                "tags": [
+                    "character"
+                ],
+                "summary": "Returns a paginated list of characters",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "Page number (must be greater than 0)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Character list returned successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "totalRecords": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "totalPages": {
+                                            "type": "integer",
+                                            "example": 17
+                                        },
+                                        "currentPage": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Naruto Uzumaki"
+                                                    },
+                                                    "about": {
+                                                        "type": "string",
+                                                        "example": "The protagonist, a hyperactive ninja who dreams of becoming Hokage. He has the Nine-Tailed Fox sealed inside him, which grants him great power."
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "https://example.com/images/narutouzumaki.jpg"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-03-11T01:46:37.548Z"
+                                                    },
+                                                    "updatedAt": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-03-11T01:46:37.548Z"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid `page` parameter"
+                    },
+                    "500": {
+                        "description": "Server error while searching for characters"
+                    }
+                }
+            }
+        },
+        "/characters/{id}": {
+            "get": {
+                "tags": [
+                    "character"
+                ],
+                "summary": "Get a character by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "The unique identifier of the character."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Character found successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Naruto Uzumaki"
+                                        },
+                                        "about": {
+                                            "type": "string",
+                                            "example": "The protagonist..."
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://classic.exame.com/wp-content/uploads/2018/02/naruto.gif?w=1024"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid `id` parameter"
+                    },
+                    "404": {
+                        "description": "Character not found"
+                    },
+                    "500": {
+                        "description": "Server error while searching for the character"
+                    }
+                }
+            }
+        },
+        "/villages": {
+            "get": {
+                "tags": [
+                    "village"
+                ],
+                "summary": "Returns a paginated list of villages",
+                "parameters": [
+                    {
+                        "name": "page",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "Page number (must be greater than 0)"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Village list returned successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "totalRecords": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "totalPages": {
+                                            "type": "integer",
+                                            "example": 17
+                                        },
+                                        "currentPage": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "integer",
+                                                        "example": 1
+                                                    },
+                                                    "name": {
+                                                        "type": "string",
+                                                        "example": "Konohagakure"
+                                                    },
+                                                    "about": {
+                                                        "type": "string",
+                                                        "example": "The Hidden Leaf Village, home to the strongest ninja and Hokages."
+                                                    },
+                                                    "url": {
+                                                        "type": "string",
+                                                        "example": "https://example.com/images/konohagakure.jpg"
+                                                    },
+                                                    "createdAt": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-03-11T01:46:37.548Z"
+                                                    },
+                                                    "updatedAt": {
+                                                        "type": "string",
+                                                        "format": "date-time",
+                                                        "example": "2025-03-11T01:46:37.548Z"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid `page` parameter"
+                    },
+                    "500": {
+                        "description": "Server error while searching for villages"
+                    }
+                }
+            }
+        },
+        "/villages/{id}": {
+            "get": {
+                "tags": [
+                    "village"
+                ],
+                "summary": "Get a village by ID",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        },
+                        "description": "The unique identifier of the village."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Village found successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Konohagakure"
+                                        },
+                                        "about": {
+                                            "type": "string",
+                                            "example": "The Hidden Leaf Village, home to the strongest ninja and Hokages."
+                                        },
+                                        "url": {
+                                            "type": "string",
+                                            "example": "https://example.com/images/konohagakure.jpg"
+                                        },
+                                        "createdAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-03-11T01:46:37.548Z"
+                                        },
+                                        "updatedAt": {
+                                            "type": "string",
+                                            "format": "date-time",
+                                            "example": "2025-03-11T01:46:37.548Z"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid `id` parameter"
+                    },
+                    "404": {
+                        "description": "Village not found"
+                    },
+                    "500": {
+                        "description": "Server error while searching for the village"
+                    }
+                }
+            }
+        }
+    }
+}

@@ -3,37 +3,28 @@ const database = require("./config/database");
 const characterRoutes = require("./routes/characterRoutes");
 const villageRoutes = require("./routes/villageRoutes");
 const cors = require("cors");
-
-const swaggerJsDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
+const path = require("path");
 
 const app = express();
+const port = 3000;
 
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      title: "Naruto Classic Wiki API",
-      version: "1.11.0",
-      description:
-        "The Naruto Classic Wiki API is a RESTful API that provides endpoints for managing information about Naruto Classic characters.",
-    },
-    servers: [
-      {
-        url: "https://naruto-classic-wiki-api.vercel.app/",
-      },
-    ],
+app.use("/swagger.json", express.static(path.join(__dirname, "swagger.json")));
+app.use(
+  "/swagger-custom.js",
+  express.static(path.join(__dirname, "swagger-custom.js"))
+);
+
+const options = {
+  swaggerOptions: {
+    url: "/swagger.json",
   },
-  apis: ["./routes/*.js"],
+  customCssUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css",
+  customJs: "/swagger-custom.js",
 };
 
-const swaggerDocs = swaggerJsDoc(swaggerOptions);
-const customCssUrl =
-  "https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/4.1.0/swagger-ui.min.css";
-
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocs, { customCssUrl }));
-
-const port = 3000;
+app.use("/", swaggerUi.serve, swaggerUi.setup(null, options));
 
 app.use(express.json());
 app.use(cors());
@@ -42,5 +33,4 @@ app.use(villageRoutes);
 
 app.listen(port, async () => {
   await database.connect();
-  console.log(`Exemplo de app rodando em http://localhost:${port}`);
 });
