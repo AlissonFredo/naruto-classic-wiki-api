@@ -20,7 +20,6 @@ class Database {
   async connect() {
     try {
       await this.sequelize.authenticate();
-      console.log("Connected to PostgreSQL database");
     } catch (error) {
       console.error("Error connecting to database: ", error);
     }

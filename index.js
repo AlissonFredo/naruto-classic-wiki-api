@@ -33,5 +33,4 @@ app.use(villageRoutes);
 
 app.listen(port, async () => {
   await database.connect();
-  console.log(`Exemplo de app rodando em http://localhost:${port}`);
 });
