@@ -1,5 +1,5 @@
 ## Executable demo
-- https://naruto-classic-wiki-api.vercel.app/
+- https://naruto-classic-wiki-api.vercel.app/api-docs
 
 ## About
 The Naruto Classic Wiki API is a RESTful API that provides endpoints for managing information about Naruto Classic characters. With this API, you can:
